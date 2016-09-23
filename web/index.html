@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Blog</title>
+    <link href="bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container body-content">
+        <div class="page-header text-centered">
+            <h1>My Blog</h1>
+        </div>
+        <form class="form-inline">
+            <div class="form-group">
+                <input type="text" placeholder="Search ..." id="search_box" class="form-control" autofocus>
+            </div>
+            <button class="btn btn-primary" onClick="search(); return false;">Search</button>
+        </form>
+
+        <div id="posts"></div>
+    </div>
+
+    <script src="jquery.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script>
+        $(find(''));
+
+        function search() {
+            var search_term = $('#search_box').val();
+            find(search_term);
+        }        
+
+        function find(search_term) {
+            $.get('/api/posts?searchterm=' + search_term, function (data) {
+                $('#posts').empty();
+                $.each(data, function (i, v) {
+                    $('#posts').html($('#posts').html() + '<h2>' + v.Title + '</h2>' + v.Content);
+                });
+            }, 'json');
+        }
+    </script>    
+</body> 
+</html>
